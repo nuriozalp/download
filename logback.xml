@@ -1,0 +1,42 @@
+<configuration debug="true" scan="false" scanPeriod="10 seconds">
+
+    <!-- Appenders -->
+    <appender name="CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>5000</queueSize>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        
+        <start>true</start>
+    </appender>
+
+    <appender name="ROLLING_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- Existing configuration... -->
+    </appender>
+
+    <appender name="ROLLING" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>5000</queueSize>
+        <appender-ref ref="ROLLING_FILE" />
+        <!-- AsyncAppender configurations... -->
+        <start>true</start>
+    </appender>
+
+    <appender name="JOBS" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>5000</queueSize>
+        <appender-ref ref="ROLLING_FILE" />
+        <!-- AsyncAppender configurations... -->
+        <start>true</start>
+    </appender>
+
+    <!-- Other appenders... -->
+
+    <!-- Loggers -->
+    <logger name="jobs" level="DEBUG" additivity="false">
+        <appender-ref ref="JOBS" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLING" />
+    </root>
+</configuration>
