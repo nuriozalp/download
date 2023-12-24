@@ -1,1 +1,1 @@
-only 8 input + 4hsc
+only 8 input + 4hsc +usb
