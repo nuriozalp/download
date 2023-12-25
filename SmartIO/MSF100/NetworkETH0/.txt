@@ -1,3 +1,0 @@
-eth 0 üzerinden usb nin görevlerini gören sürüm.
-
-hsc + input + usb + eth0
