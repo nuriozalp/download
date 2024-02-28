@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VENDOR_ID="04d8" # RFID cihazının vendor ID'si
+VENDOR_ID="04d8" # RFID cihazının vendor ID'si -- udevadm info -a -n /dev/ttyACM1 | grep '{idVendor}' | head -n1
 
 # /dev/ttyACM* ve /dev/ttyUSB* cihazları için döngü oluştur
 for DEVICE in /dev/tty*; do
