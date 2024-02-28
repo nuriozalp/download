@@ -10,17 +10,17 @@ sudo wget -O barcode.sh  https://github.com/nuriozalp/download/raw/master/test/b
 
 sudo apt-get install dos2unix;
  
-dos2unix ./udev.sh;
-dos2unix ./rfid.sh;
-dos2unix ./barcode.sh;
+sudo dos2unix ./udev.sh;
+sudo dos2unix ./rfid.sh;
+sudo dos2unix ./barcode.sh;
 
 chown -R "meta" udev.sh;
 chown -R "meta" rfid.sh;
 chown -R "meta" barcode.sh;
 chmod 777 udev.sh rfid.sh barcode.sh;
-./udev.sh;
-./rfid.sh;
-./barcode.sh;
+sudo ./udev.sh;
+sudo ./rfid.sh;
+sudo ./barcode.sh;
 }
 
 authorizeAndRestart(){

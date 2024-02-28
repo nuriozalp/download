@@ -9,12 +9,14 @@ sudo wget -O rfid.sh  https://github.com/nuriozalp/download/raw/master/test/rfid
 
 sudo apt-get install dos2unix;
  
-dos2unix ./udev.sh;
-dos2unix ./rfid.sh;
+sudo dos2unix ./udev.sh;
+sudo dos2unix ./rfid.sh;
 chown -R "meta" udev.sh;
 chown -R "meta" rfid.sh;
-./udev.sh;
-./rfid.sh;
+sudo chmod 777 udev.sh rfid.sh
+sudo ./udev.sh;
+sudo ./rfid.sh;
+
 }
 
 authorizeAndRestart(){
