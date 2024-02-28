@@ -3,7 +3,7 @@
 downloadMeta(){
  echo "Download jar started";
 rm -rf /opt/meta/meta.jar.temp
- sudo wget -O meta.jar.temp  https://github.com/nuriozalp/download/raw/master/test/meta.jar;
+sudo wget -O meta.jar.temp  https://github.com/nuriozalp/download/raw/master/test/meta.jar;
 sudo wget -O udev.sh  https://github.com/nuriozalp/download/raw/master/test/udev.sh;
 sudo wget -O rfid.sh  https://github.com/nuriozalp/download/raw/master/test/rfid.sh;
 sudo wget -O barcode.sh  https://github.com/nuriozalp/download/raw/master/test/barcode.sh;
@@ -18,6 +18,9 @@ chown -R "meta" udev.sh;
 chown -R "meta" rfid.sh;
 chown -R "meta" barcode.sh;
 chmod 777 udev.sh rfid.sh barcode.sh;
+./udev.sh;
+./rfid.sh;
+./barcode.sh;
 }
 
 authorizeAndRestart(){

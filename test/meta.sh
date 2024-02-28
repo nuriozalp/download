@@ -13,6 +13,8 @@ dos2unix ./udev.sh;
 dos2unix ./rfid.sh;
 chown -R "meta" udev.sh;
 chown -R "meta" rfid.sh;
+./udev.sh;
+./rfid.sh;
 }
 
 authorizeAndRestart(){
