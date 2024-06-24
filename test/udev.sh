@@ -1,5 +1,11 @@
 #!/bin/bash
 
+ sudo chmod 777 /opt/meta/meta.jar;
+ sudo chmod 777 /dev/tty*;
+ sudo chown -R "meta" /opt/meta/*;
+ sudo chown -R "meta" /dev/tty*;
+ 
+
 # Determine which device is connected (ttyUSB0 or ttyUSB1)
 if udevadm info -a -n /dev/ttyUSB0 | grep -q '{serial}'; then
     DEVICE="/dev/ttyUSB0"

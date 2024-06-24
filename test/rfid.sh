@@ -2,6 +2,11 @@
 
 VENDOR_ID="04d8" # RFID cihazının vendor ID'si -- udevadm info -a -n /dev/ttyACM1 | grep '{idVendor}' | head -n1
 
+ sudo chmod 777 /opt/meta/meta.jar;
+ sudo chmod 777 /dev/tty*;
+ sudo chown -R "meta" /opt/meta/*;
+ sudo chown -R "meta" /dev/tty*;
+
 # /dev/ttyACM* ve /dev/ttyUSB* cihazları için döngü oluştur
 for DEVICE in /dev/tty*; do
     # Cihazın vendor ID'sini kontrol et

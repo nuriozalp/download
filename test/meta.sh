@@ -23,7 +23,6 @@ authorizeAndRestart(){
  mv /opt/meta/meta.jar.temp /opt/meta/meta.jar
  sudo chmod 777 /opt/meta/meta.jar;
  sudo chown -R "meta" /opt/meta/*;
- sudo chown -R "meta" /dev/tty*;
  supervisorctl restart meta;
 }
 
