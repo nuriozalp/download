@@ -1,3 +1,7 @@
 eth 1 üzerinden usb nin görevlerini gören sürüm.
 
 hsc + input + usb + eth1
+
+MSF100_cont_lines_ETH1.bin : for continues lines, NO settings for rising/falling + filtering + standby + cycling
+
+
