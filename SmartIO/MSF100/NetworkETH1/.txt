@@ -5,3 +5,5 @@ hsc + input + usb + eth1
 MSF100_cont_lines_ETH1.bin : for continues lines, NO settings for rising/falling + filtering + standby + cycling
 
 
+Updates : mac editleme özelligi eklendi. print1 -> mevcut paremetre görüntüleme printt1 -> temp buffer paremetre görüntüleme (anlık setlenen ama henüz kaydedilmeyen)
+
