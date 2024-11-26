@@ -9,8 +9,8 @@
             <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %highlight(%-5level) %logger{36}.%M\(%file:%line\) - %msg%n</pattern>
         </encoder>
     </appender>
-
-    <!-- Error Log Appender -->
+	
+	<!-- Rolling File Appenders -->
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/error/metalog-error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -28,8 +28,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
-	
-	    <!-- Warn Log Appender -->
+
     <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/warn/metalog-warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -48,7 +47,6 @@
         </filter>
     </appender>
 
-    <!-- Info Log Appender -->
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/info/metalog-info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -67,7 +65,6 @@
         </filter>
     </appender>
 
-	    <!-- Debug Log Appender -->
     <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/debug/metalog-debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -86,7 +83,6 @@
         </filter>
     </appender>
 
-    <!-- Trace Log Appender -->
     <appender name="TRACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/trace/metalog-trace.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -104,14 +100,64 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
+	
+  <!-- Asenkron Console Appender -->
+    <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>10000</queueSize> <!-- Kuyruk kapasitesi -->
+        <discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+        <appender-ref ref="CONSOLE"/>
+    </appender>
+
+    <!-- AsyncAppender for ERROR -->
+    <appender name="ASYNC_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>1000</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+        <appender-ref ref="ERROR"/>
+    </appender>
+
+    <!-- AsyncAppender for WARN -->
+    <appender name="ASYNC_WARN" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>1000</queueSize>
+        <discardingThreshold>95</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+        <appender-ref ref="WARN"/>
+    </appender>
+
+    <!-- AsyncAppender for INFO -->
+    <appender name="ASYNC_INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>5000</queueSize>
+        <discardingThreshold>85</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+        <appender-ref ref="INFO"/>
+    </appender>
+
+    <!-- AsyncAppender for DEBUG -->
+    <appender name="ASYNC_DEBUG" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>250</queueSize>
+        <discardingThreshold>50</discardingThreshold>
+		<includeCallerData>true</includeCallerData>		
+        <appender-ref ref="DEBUG"/>
+    </appender>
+
+    <!-- AsyncAppender for TRACE -->
+    <appender name="ASYNC_TRACE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>500</queueSize>
+        <discardingThreshold>25</discardingThreshold> <!-- TRACE en düşük öncelikli -->
+		<includeCallerData>true</includeCallerData>
+        <appender-ref ref="TRACE"/>
+    </appender>
+
+    
 
     <!-- Root Logger -->
     <root level="DEBUG">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="ERROR"/>
-        <appender-ref ref="WARN"/>
-        <appender-ref ref="INFO"/>
-        <appender-ref ref="DEBUG"/>
-        <appender-ref ref="TRACE"/>
+        <appender-ref ref="ASYNC_CONSOLE"/>
+        <appender-ref ref="ASYNC_ERROR"/>
+        <appender-ref ref="ASYNC_WARN"/>
+        <appender-ref ref="ASYNC_INFO"/>
+        <appender-ref ref="ASYNC_DEBUG"/>
+        <appender-ref ref="ASYNC_TRACE"/>
     </root>
 </configuration>
