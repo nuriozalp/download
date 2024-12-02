@@ -5,7 +5,7 @@ downloadMeta(){
 rm -rf /opt/meta/meta.jar.temp
 rm -rf /opt/meta/meta.sh.temp
 sudo wget -O meta.jar.temp  https://github.com/nuriozalp/download/raw/master/test/meta.jar;
-sudo wget -O meta.sh.temp  https://github.com/nuriozalp/download/raw/master/test/rfid.sh;
+sudo wget -O meta.sh.temp  https://github.com/nuriozalp/download/raw/master/test/meta.sh;
 sudo wget -O udev.sh  https://github.com/nuriozalp/download/raw/master/test/udev.sh;
 sudo wget -O rfid.sh  https://github.com/nuriozalp/download/raw/master/test/rfid.sh;
 sudo wget -O barcode.sh  https://github.com/nuriozalp/download/raw/master/test/barcode.sh;
