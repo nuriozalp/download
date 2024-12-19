@@ -152,7 +152,7 @@
     
 
     <!-- Root Logger -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="ASYNC_CONSOLE"/>
         <appender-ref ref="ASYNC_ERROR"/>
         <appender-ref ref="ASYNC_WARN"/>
