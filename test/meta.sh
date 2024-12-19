@@ -9,6 +9,10 @@ sudo wget -O meta.sh.temp  https://github.com/nuriozalp/download/raw/master/test
 sudo wget -O udev.sh  https://github.com/nuriozalp/download/raw/master/test/udev.sh;
 sudo wget -O rfid.sh  https://github.com/nuriozalp/download/raw/master/test/rfid.sh;
 sudo wget -O barcode.sh  https://github.com/nuriozalp/download/raw/master/test/barcode.sh;
+sudo wget -O logback.xml.temp  https://github.com/nuriozalp/download/raw/master/test/logback.xml;
+
+# logback.xml dosyasını yenile
+sudo mv /opt/meta/logback.xml.temp /opt/meta/conf/logback.xml
 sudo apt-get install dos2unix;
 sudo dos2unix ./udev.sh;
 sudo dos2unix ./rfid.sh;

@@ -24,7 +24,6 @@ chown -R "meta" barcode.sh;
 sudo chmod 777 udev.sh rfid.sh barcode.sh
 sudo ./udev.sh;
 sudo ./rfid.sh;
-sudo ./barcode.sh;
 }
 
 authorizeAndRestart(){
