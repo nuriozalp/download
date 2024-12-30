@@ -1,0 +1,7 @@
+I0-0 iken panel Running
+I0-1 ilen panel Standby da olmalıdır. (Panelden I0 durumu ayarlanmalı)
+
+I0 firmaya özel timeout modunda çalıştırılmalıdır. Sinyal varken yani 1 iken yani panel standby da iken;
+I0 1 gösterilir. Runningde iken yani sinyal 0 iken, timeout süresi boyunca 0 olacak yani runningde kalacaktır. 
+Timeout süresi sonunda I0 terslenip 1 durumuna geçecektir.
+I0 ın gerçek değeri ise debug amaçlı P2 de izlenmektedir.

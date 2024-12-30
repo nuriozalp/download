@@ -1,0 +1,22 @@
+-*Coskunöz bin dosyasında I0 Timeout ( I1 I2 I3 aktif değildir.) ve P1 P2 P3 P4 durumları base alınmıştır.
+
+Kart DEFAULT FALLING ÇALIŞMAKTADIR.
+PANELDEN AYARLANMASI GEREKEN DEĞİŞKENLER :
+
+1. FILTERIN SÜRELERİ
+2. I0 TIMEOUT SÜRESİ
+3. GEREKLİ İSE STANDBY SÜRELERİ
+
+ONUN DIŞINDA HERHANGİ BİR DEĞİŞİKLİK YAPILMAYACAK !
+
+DEĞERLERİ SETLERKEN HABERLEŞME HIZI 500-1000 MS ARASI OLSUN 
+VE BİRDEN FAZLA KEZ SETLEYİN !
+
+
+************Örnek Test Senaryosu****************
+
+1. Panel ekranından I0 Timeout süresi 20 ye (yani 2 saniyeye ayarlanır.)
+2. I0 a 1 sinyalı uygulanır timeout süresi sonrasında 0 a düştüğü gözlemlenir, 1 sinyali uygulamaya devam edildiği halde.
+3. I0 a 0 sinyali uygulanır ardından 1 sinyali uygulanır I0 ekranda 1 olur ve timeout süresi geçtikten sonra tekrar 0 a düşer.
+4. p1 p2 p3 p4 hepsi aynı anda 0 ise timeout süresi sonunda 1 sinyalı uygulanan I0 ın 0 a düştüğü gözlemlenir.
+5. P1 P2 P3 P4 en az 1 tanesi 1 olduğunda I0 da sinyal varsa timeout süresi bitmiş olsa bile IO ın 1 olduğu gözlemlenir.

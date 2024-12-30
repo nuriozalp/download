@@ -1,0 +1,16 @@
+CoskunOzDemoAnalizor.bin dosyası yüklenir.
+
+Kael Energy 01-DIN RS485 cihazı arayüzünden ; 
+
+device no : 1
+baudrate  : 9600
+parity    : no
+stop bit  : 1
+olarak ayarlanır.
+
+Cihaz üzerindeki B ve A klemens bağlantıları sırasıyla SMART IO Kart B ve A noktalarına aynı isimler denk gelecek
+şekilde bağlanır.
+
+Cihaza bağlanan ;
+
+L1 L2 L3 voltajları MSF Analog sayfasında gözlemlenir.

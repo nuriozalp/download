@@ -1,0 +1,2 @@
+HSC1 ve HSC2 kanallarına bağlanan sinyallerin ortalama hızlarını Analog sayfasında AI0 ve AI1 ekranlarında görülmesi hedeflenmektedir.
+Temiz bir ortalama yakalamak adına her 10 adımda bir güncellenmektedir.

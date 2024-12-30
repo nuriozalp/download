@@ -1,0 +1,104 @@
+<configuration debug="true" scan="false" scanPeriod="10 seconds">
+
+    <!--<logger name="com.betex.task.bet" level="WARN"/>-->
+    <!--<logger name="com.betex.task.down" level="WARN"/>-->
+    <!--<logger name="com.betex.task.fixture" level="WARN"/>-->
+    <!--<logger name="com.betex" level="ERROR"/>-->
+    <!--<logger name="com.dasssmart.desktop" level="ERROR"/>-->
+    <logger name="com.mchange" level="WARN"/>
+
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/dass-desktop.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>logs/dass-desktop-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each file should be at most 100MB, keep 100 days worth of history, but at most 10GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>100</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level %logger{36}.%M\(%file:%line\) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="JOBS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/jobs-dass-desktop.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>logs/jobs-dass-desktop-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each file should be at most 100MB, keep 30 days worth of history, but at most 10GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level %logger{36}.%M\(%file:%line\) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level %logger{36}.%M\(%file:%line\) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="jobs" level="DEBUG" additivity="false">
+        <appender-ref ref="JOBS"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLING"/>
+    </root>
+
+</configuration>
+
+<!--<configuration debug="false" scan="false" scanPeriod="10 seconds">-->
+
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--<encoder>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+   <!---->
+    <!---->
+    <!--<appender name="executions" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>d:\\logs\\betradar-uof\\logs\\executions-pronet.log</file>-->
+        <!--<append>true</append>-->
+        <!--<encoder>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>-->
+        <!--</encoder>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>logs/%d{yyyy-MM-dd}.%i.executions-pronet.zip</fileNamePattern>-->
+            <!--<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+                <!--<maxFileSize>50MB</maxFileSize>-->
+            <!--</timeBasedFileNamingAndTriggeringPolicy>-->
+            <!--<maxHistory>2</maxHistory>-->
+            <!--<cleanHistoryOnStart>true</cleanHistoryOnStart>-->
+        <!--</rollingPolicy>-->
+    <!--</appender>-->
+    <!--<logger name="executions" level="INFO" additivity="false">-->
+        <!--<appender-ref ref="executions"/>-->
+    <!--</logger>-->
+    <!---->
+    <!--<appender name="dblog" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>d:\\logs\\betradar-uof\\logs\\dblogs\\dblogs.log</file>-->
+        <!--<append>true</append>-->
+        <!--<encoder>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} - %msg%n</pattern>-->
+        <!--</encoder>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>logs/dblogs/%d{yyyy-MM-dd}.%i.dblogs.zip</fileNamePattern>-->
+            <!--<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+                <!--<maxFileSize>50MB</maxFileSize>-->
+            <!--</timeBasedFileNamingAndTriggeringPolicy>-->
+            <!--<maxHistory>2</maxHistory>-->
+            <!--<cleanHistoryOnStart>true</cleanHistoryOnStart>-->
+        <!--</rollingPolicy>-->
+    <!--</appender>-->
+    <!---->
+<!--</configuration>-->

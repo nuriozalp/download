@@ -1,0 +1,16 @@
+eth 1 üzerinden usb nin görevlerini gören sürüm. (hsc + input + usb + eth1)
+
+Updates : mac editleme özelligi eklendi. print1 -> mevcut paremetre görüntüleme printt1 -> temp buffer paremetre görüntüleme (anlık setlenen ama henüz kaydedilmeyen)
+----------------------------------------------------------------------------
+23.12.2024
+
+AEMOT çift sayma problemi için kod eklendi.
+stream data size değiştirilebilir hale getirildi.
+stream data veri basma periyodu değiştirilebilir hale getirildi.
+----------------------------------------------------------------------------
+
+24.12.2024
+
+Slave id indeksleri HSC8 yerine tüm protokol uzunlukları için kaydırıldı.
+Girişlerin değişimine göre hemen send yapma özelliği eklendi.
+
