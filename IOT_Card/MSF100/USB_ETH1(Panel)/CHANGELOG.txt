@@ -14,3 +14,8 @@ stream data veri basma periyodu değiştirilebilir hale getirildi.
 Slave id indeksleri HSC8 yerine tüm protokol uzunlukları için kaydırıldı.
 Girişlerin değişimine göre hemen send yapma özelliği eklendi.
 
+----------------------------
+09.04.2025
+
+216 bytelık protokol desteği eklendi.
+falling edge de cycle timeout da çıkan bug düzeltildi.
