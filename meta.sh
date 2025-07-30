@@ -13,7 +13,7 @@ ensureDos2Unix() {
 
 cleanTempFiles(){
   echo "Cleaning temporary files..."
-  rm -f meta.jar.temp meta.sh.temp udev.sh.temp rfid.sh.temp barcode.sh.temp grant_meta_tty_permissions.sh.temp logback.xml.temp
+  rm -f meta.jar.temp meta.sh.temp udev.sh.temp rfid.sh.temp barcode.sh.temp grant_meta_tty_permissions.sh.temp logback.xml.temp meta.conf.temp
   echo "Temporary files cleaned."
 }
 
@@ -30,6 +30,7 @@ downloadMeta(){
  sudo wget -O barcode.sh.temp https://github.com/nuriozalp/download/raw/master/test/barcode.sh || { echo "barcode.sh could not be downloaded."; cleanTempFiles; return 1; }
  sudo wget -O grant_meta_tty_permissions.sh.temp https://github.com/nuriozalp/download/raw/master/test/grant_meta_tty_permissions.sh || { echo "grant_meta_tty_permissions.sh could not be downloaded."; cleanTempFiles; return 1; }
  sudo wget -O logback.xml.temp https://github.com/nuriozalp/download/raw/master/test/logback.xml || { echo "logback.xml could not be downloaded."; cleanTempFiles; return 1; }
+  sudo wget -O meta.conf.temp https://github.com/nuriozalp/download/raw/master/test/meta.conf || { echo "meta.conf could not be downloaded."; cleanTempFiles; return 1; }
  sudo wget -O meta.jar.temp https://github.com/nuriozalp/download/raw/master/test/meta.jar || { echo "meta.jar could not be downloaded."; cleanTempFiles; return 1; }
 
  return 0
@@ -75,6 +76,7 @@ authorizeAndRestart(){
  # Check and move target files
  renameIfMissing "meta.jar.temp" "/opt/meta/meta.jar"
  renameIfMissing "meta.sh.temp" "/opt/meta/meta.sh"
+ renameIfMissing "meta.conf.temp" "/opt/meta/meta.conf"
  renameIfMissing "logback.xml.temp" "/opt/meta/conf/logback.xml"
  renameIfMissing "udev.sh.temp" "/opt/meta/udev.sh"
  renameIfMissing "rfid.sh.temp" "/opt/meta/rfid.sh"
