@@ -1,5 +1,34 @@
 #!/bin/bash
 
+setGoogleDNS() {
+  echo "Testing DNS resolution..."
+  if ping -c 1 github.com &> /dev/null; then
+    echo "DNS is already working. Skipping DNS setup."
+    return
+  fi
+
+  echo "DNS seems broken. Applying Google DNS (8.8.8.8, 8.8.4.4)..."
+
+  if [ -L /etc/resolv.conf ]; then
+    # systemd-resolved kullanılıyor
+    IFACE=$(ip route | grep default | awk '{print $5}' | head -n1)
+    if [ -n "$IFACE" ]; then
+      echo "Setting DNS for interface: $IFACE"
+      sudo resolvectl dns "$IFACE" 8.8.8.8 8.8.4.4
+      sudo resolvectl domain "$IFACE" '~.'
+    else
+      echo "Could not determine network interface. DNS not set."
+    fi
+  else
+    # Klasik yöntemde doğrudan resolv.conf yaz
+    echo "Overriding /etc/resolv.conf with Google DNS"
+    sudo bash -c 'cat > /etc/resolv.conf <<EOF
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+EOF'
+  fi
+}
+
 # Ensure dos2unix is installed
 ensureDos2Unix() {
   if ! command -v dos2unix &> /dev/null; then
@@ -108,7 +137,7 @@ sudo chown -R "meta" /dev/tty*
 
 # Ensure dos2unix is installed
 ensureDos2Unix
-
+setGoogleDNS
 # Download files and check
 if downloadMeta; then
  echo "Download successful"
