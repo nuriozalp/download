@@ -7,7 +7,17 @@ setGoogleDNS() {
     return
   fi
 
-  echo "DNS seems broken. Applying Google DNS (8.8.8.8, 8.8.4.4)..."
+  echo "DNS resolution failed. Checking existing DNS configuration..."
+
+  # /etc/resolv.conf dosyasından mevcut nameserver'ları oku
+  if grep -q "^nameserver" /etc/resolv.conf; then
+    echo "Existing DNS configuration found:"
+    grep "^nameserver" /etc/resolv.conf
+    echo "Will not override existing DNS servers."
+    return
+  fi
+
+  echo "No existing DNS servers found. Applying Google DNS (8.8.8.8, 8.8.4.4)..."
 
   if [ -L /etc/resolv.conf ]; then
     # systemd-resolved kullanılıyor
@@ -20,7 +30,7 @@ setGoogleDNS() {
       echo "Could not determine network interface. DNS not set."
     fi
   else
-    # Klasik yöntemde doğrudan resolv.conf yaz
+    # Klasik yöntem
     echo "Overriding /etc/resolv.conf with Google DNS"
     sudo bash -c 'cat > /etc/resolv.conf <<EOF
 nameserver 8.8.8.8
@@ -28,6 +38,7 @@ nameserver 8.8.4.4
 EOF'
   fi
 }
+
 
 # Ensure dos2unix is installed
 ensureDos2Unix() {
