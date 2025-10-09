@@ -1,4 +1,4 @@
-<configuration>
+<configuration scan="true" scanPeriod="600 seconds">
     <!-- Console Appender -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!-- Console'da belirli bir seviyeden yukarısı görünsün -->
