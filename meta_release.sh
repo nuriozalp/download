@@ -1,3 +1,5 @@
+#!/bin/bash
+
 LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases/latest | grep -oP '"tag_name": "\K[^"]+')
 
 setGoogleDNS() {
