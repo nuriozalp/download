@@ -1,4 +1,4 @@
-LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases/latest | grep -oP '"tag_name": "\K[^"]+')
+#!/bin/bash
 
 setGoogleDNS() {
   echo "Testing DNS resolution..."
@@ -71,8 +71,7 @@ downloadMeta(){
  sudo wget -O grant_meta_tty_permissions.sh.temp https://github.com/nuriozalp/download/raw/master/test/grant_meta_tty_permissions.sh || { echo "grant_meta_tty_permissions.sh could not be downloaded."; cleanTempFiles; return 1; }
  sudo wget -O logback.xml.temp https://github.com/nuriozalp/download/raw/master/test/logback.xml || { echo "logback.xml could not be downloaded."; cleanTempFiles; return 1; }
   sudo wget -O meta.conf.temp https://github.com/nuriozalp/download/raw/master/test/meta.conf || { echo "meta.conf could not be downloaded."; cleanTempFiles; return 1; }
- #sudo wget -O meta.jar.temp https://github.com/nuriozalp/download/raw/master/test/meta.jar || { echo "meta.jar could not be downloaded."; cleanTempFiles; return 1; }
- sudo wget -O meta.jar.temp https://github.com/nuriozalp/download/releases/download/$LATEST_TAG/meta.jar || { echo "meta.jar could not be downloaded."; cleanTempFiles; return 1; }
+ sudo wget -O meta.jar.temp https://github.com/nuriozalp/download/raw/master/test/meta.jar || { echo "meta.jar could not be downloaded."; cleanTempFiles; return 1; }
 
  return 0
 }
