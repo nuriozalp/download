@@ -1,6 +1,19 @@
 #!/bin/bash
 
-LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases/latest | grep -oP '"tag_name": "\K[^"]+')
+#LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases/latest | grep -oP '"tag_name": "\K[^"]+')
+
+ensureJq() {
+  if ! command -v jq &> /dev/null; then
+    echo "jq not found. Trying to install..."
+    sudo apt-get update || echo "Failed to update package lists, continuing..."
+    sudo apt-get install -y jq || {
+      echo "jq is required but could not be installed."
+      exit 1
+    }
+  else
+    echo "jq is already installed."
+  fi
+}
 
 setGoogleDNS() {
   echo "Testing DNS resolution..."
@@ -40,7 +53,6 @@ nameserver 8.8.4.4
 EOF'
   fi
 }
-
 
 # Ensure dos2unix is installed
 ensureDos2Unix() {
@@ -139,6 +151,21 @@ authorizeAndRestart(){
  # Restart the service
  supervisorctl restart meta
 }
+
+ensureJq
+
+LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases \
+  | jq -r '.[] | select(.prerelease == false) | .tag_name' \
+  | sort -V \
+  | tail -n 1)
+
+
+if [ -z "$LATEST_TAG" ]; then
+  echo "Could not determine latest release tag. Exiting."
+  exit 1
+fi
+
+echo "Latest release tag detected: $LATEST_TAG"
 
 # USB autosuspend settings
 sudo echo -1 >/sys/module/usbcore/parameters/autosuspend
