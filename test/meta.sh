@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#v1.0.0
+
 #LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases/latest | grep -oP '"tag_name": "\K[^"]+')
 
 ensureJq() {
@@ -171,10 +173,10 @@ API_URL="https://api.github.com/repos/nuriozalp/download/releases/latest"
 
 if command -v jq &> /dev/null; then
   echo "Using jq to parse latest tag..."
-  LATEST_TAG=$(curl -fsSL "$API_URL" | jq -r '.tag_name')
+  LATEST_TAG=$(wget -qO- "$API_URL" | jq -r '.tag_name')
 else
   echo "jq not available. Falling back to basic parsing..."
-  LATEST_TAG=$(curl -fsSL "$API_URL" | grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 | cut -d'"' -f4)
+  LATEST_TAG=$(wget -qO- "$API_URL" | grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 | cut -d'"' -f4)
 fi
 
 #LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases \
