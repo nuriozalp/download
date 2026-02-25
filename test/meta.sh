@@ -167,10 +167,24 @@ ensureDos2Unix
 setGoogleDNS
 ensureJq
 
-LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases \
-  | jq -r '.[] | select(.prerelease == false) | .tag_name' \
-  | sort -V \
-  | tail -n 1)
+API_URL="https://api.github.com/repos/nuriozalp/download/releases/latest"
+
+if command -v jq &> /dev/null; then
+  echo "Using jq to parse latest tag..."
+  LATEST_TAG=$(curl -fsSL "$API_URL" | jq -r '.tag_name')
+else
+  echo "jq not available. Falling back to basic parsing..."
+  LATEST_TAG=$(curl -fsSL "$API_URL" | grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 | cut -d'"' -f4)
+fi
+
+#LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases \
+#  | jq -r '.[] | select(.prerelease == false) | .tag_name' \
+#  | sort -V \
+#  | tail -n 1)
+  
+#LATEST_TAG=$(curl -fsSL \
+#  https://api.github.com/repos/nuriozalp/download/releases/latest \
+#  | jq -r '.tag_name')
 
 
 if [ -z "$LATEST_TAG" ]; then

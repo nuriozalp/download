@@ -1,5 +1,20 @@
 #!/bin/bash
 
+#LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases/latest | grep -oP '"tag_name": "\K[^"]+')
+
+ensureJq() {
+  if ! command -v jq &> /dev/null; then
+    echo "jq not found. Trying to install..."
+    sudo apt-get update || echo "Failed to update package lists, continuing..."
+    sudo apt-get install -y jq || {
+      echo "jq is required but could not be installed."
+      exit 1
+    }
+  else
+    echo "jq is already installed."
+  fi
+}
+
 setGoogleDNS() {
   echo "Testing DNS resolution..."
   if ping -c 1 github.com &> /dev/null; then
@@ -39,7 +54,6 @@ EOF'
   fi
 }
 
-
 # Ensure dos2unix is installed
 ensureDos2Unix() {
   if ! command -v dos2unix &> /dev/null; then
@@ -71,7 +85,8 @@ downloadMeta(){
  sudo wget -O grant_meta_tty_permissions.sh.temp https://github.com/nuriozalp/download/raw/master/test/grant_meta_tty_permissions.sh || { echo "grant_meta_tty_permissions.sh could not be downloaded."; cleanTempFiles; return 1; }
  sudo wget -O logback.xml.temp https://github.com/nuriozalp/download/raw/master/test/logback.xml || { echo "logback.xml could not be downloaded."; cleanTempFiles; return 1; }
   sudo wget -O meta.conf.temp https://github.com/nuriozalp/download/raw/master/test/meta.conf || { echo "meta.conf could not be downloaded."; cleanTempFiles; return 1; }
- sudo wget -O meta.jar.temp https://github.com/nuriozalp/download/raw/master/test/meta.jar || { echo "meta.jar could not be downloaded."; cleanTempFiles; return 1; }
+ #sudo wget -O meta.jar.temp https://github.com/nuriozalp/download/raw/master/test/meta.jar || { echo "meta.jar could not be downloaded."; cleanTempFiles; return 1; }
+ sudo wget -O meta.jar.temp https://github.com/nuriozalp/download/releases/download/$LATEST_TAG/meta.jar || { echo "meta.jar could not be downloaded."; cleanTempFiles; return 1; }
 
  return 0
 }
@@ -137,6 +152,7 @@ authorizeAndRestart(){
  supervisorctl restart meta
 }
 
+
 # USB autosuspend settings
 sudo echo -1 >/sys/module/usbcore/parameters/autosuspend
 sudo modprobe usbcore autosuspend=-1
@@ -149,6 +165,34 @@ sudo chown -R "meta" /dev/tty*
 # Ensure dos2unix is installed
 ensureDos2Unix
 setGoogleDNS
+ensureJq
+
+API_URL="https://api.github.com/repos/nuriozalp/download/releases/latest"
+
+if command -v jq &> /dev/null; then
+  echo "Using jq to parse latest tag..."
+  LATEST_TAG=$(curl -fsSL "$API_URL" | jq -r '.tag_name')
+else
+  echo "jq not available. Falling back to basic parsing..."
+  LATEST_TAG=$(curl -fsSL "$API_URL" | grep -o '"tag_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -n1 | cut -d'"' -f4)
+fi
+
+#LATEST_TAG=$(curl -s https://api.github.com/repos/nuriozalp/download/releases \
+#  | jq -r '.[] | select(.prerelease == false) | .tag_name' \
+#  | sort -V \
+#  | tail -n 1)
+  
+#LATEST_TAG=$(curl -fsSL \
+#  https://api.github.com/repos/nuriozalp/download/releases/latest \
+#  | jq -r '.tag_name')
+
+
+if [ -z "$LATEST_TAG" ]; then
+  echo "Could not determine latest release tag. Exiting."
+  exit 1
+fi
+echo "Latest release tag detected: $LATEST_TAG"
+
 # Download files and check
 if downloadMeta; then
  echo "Download successful"
