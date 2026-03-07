@@ -167,7 +167,7 @@ sudo chown -R "meta" /dev/tty*
 # Ensure dos2unix is installed
 ensureDos2Unix
 setGoogleDNS
-ensureJq
+# ensureJq
 
 API_URL="https://api.github.com/repos/nuriozalp/download/releases/latest"
 
