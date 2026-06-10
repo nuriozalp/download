@@ -1,0 +1,25 @@
+# Eger cleanSession = false olacak ise clientId static olmali
+# MQTT Configuration
+mqtt.enabled=true
+mqtt.broker.url=tcp://192.168.20.4:1883
+mqtt.clientId=msf-mqtt-${random.value}
+mqtt.username=
+mqtt.password=
+mqtt.completionTimeout=5000
+mqtt.connection.timeout=30
+mqtt.connection.keepAliveInterval=60
+mqtt.connection.automaticReconnect=true
+mqtt.connection.cleanSession=true
+mqtt.connection.maxInflight=1000
+
+# MQTT Async
+mqtt.async=true
+
+# MQTT Topics
+mqtt.topics.inbound=dass/msf/warehouse
+mqtt.topics.outbound.defaultTopic=dass/msf/warehouse/outbound
+mqtt.qos.inbound=1
+mqtt.qos.outbound=1
+
+# MQTT Message Processing
+mqtt.processor.threads=2
